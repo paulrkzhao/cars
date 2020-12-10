@@ -2,44 +2,35 @@
 # cars.sh
 # Paul Zhao
 
-echo "This program will add cars to a file. Here is the menu of options:"
-echo "Type \"1\" to Add a car"
-echo "Type \"2\" to List the cars in the inventory file"
-echo "Type \"3\" to Quit the program"
+menuOption=0
 
-touch My_old_cars.txt
+echo "Cars.sh"
+echo " "
 
-read -r OPTION
-
-while [ "$OPTION" -eq "1" ] || [ "$OPTION" -eq "2" ]
+while ["$menuOption" -ne "3" ]
 do
-	if [ "$OPTION" -eq "1" ]
-	then
-		echo "Enter the year:"
-		read -r YEAR
-		echo "Enter the make:"
-		read -r MAKE
-		echo "Enter the model:"
-		read -r MODEL
-		echo "$YEAR:$MAKE:$MODEL" >> My_old_cars.txt
-		echo "Thank you, I have added your car to the file"
-	fi
-	if [ "$OPTION" -eq "2" ]
-	then
-		echo "==================="
-		echo "File contents:"
-		echo ""
-		cat My_old_cars.txt
-		echo "==================="
-	fi
-	echo "-----------------------------"
-	echo "Type \"1\" to Add a car"
-	echo "Type \"2\" to List the cars in the inventory file"
-	echo "Type \"3\" to Quit the program"
 
-	read -r OPTION
+	echo "What would you like to do?"
+	echo "Type 1 to enter a new car"
+	echo "Type 2 to display the list of cars"
+	echo "Type 3 to save and exit the program"
+	read -r menuOption
+
+	case "$menuOption" in
+		"1") echo "Enter the year of the car:"
+		read -r year
+		echo "Enter the make of the car:"
+		read -r make
+		echo "Enter the model of the car:"
+		read -r model
+		newCar="$year:$make:$model"
+		echo "$newCar" >> My_old_cars;;
+		"2") sort My_old_cars;;
+		"3") echo "Thank you for using cars.sh";;
+		*) echo "Sorry, that option is invalid";;
+	esac
+
+	echo " "
+
 done
-echo "========================"
-echo "========================"
-echo "Thank you. Please read My_old_cars.txt for info about your cars"
 
