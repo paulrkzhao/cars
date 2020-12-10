@@ -7,7 +7,7 @@ menuOption=0
 echo "Cars.sh"
 echo " "
 
-while ["$menuOption" -ne "3" ]
+while [ "$menuOption" -ne "3" ]
 do
 
 	echo "What would you like to do?"
